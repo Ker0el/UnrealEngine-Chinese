@@ -36,7 +36,7 @@
 
 **v0.4.4 安装包**（含预编译 DLL，开箱即用，支持 UE 5.0 – 5.8）：
 
-到 [Releases v0.4.4](https://github.com/Ker0el/UnrealEngine-Chinese/releases/tag/v0.4.4) 按引擎版本下载。**认准不带 `_Source` 的文件名**：带 `_Source` 的是纯源码包，不含 DLL，普通用户下错了会提示「模块缺失或引擎版本不同」。
+到 [Releases v0.4.4](https://github.com/Ker0el/UnrealEngine-Chinese/releases/tag/v0.4.4) 按引擎版本下载。这个发布里只有开箱即用的安装包（含 DLL），不需要自己编译。
 
 | 引擎版本 | 安装包 |
 |---|---|
@@ -50,7 +50,7 @@
 | UE 5.7 | `StarryUEZh_v0.4.4_UE5.7.zip` |
 | UE 5.8 | `StarryUEZh_v0.4.4_UE5.8.zip` |
 
-> `StarryUEZh_v0.4.4_UE5.x_Source.zip` 是纯源码包（不含 DLL），只给 Fab 审核和愿意自行编译的开发者用，普通用户不需要下载。
+> 纯源码包（不含 DLL）放在单独的 [fab-source-v0.4.4](https://github.com/Ker0el/UnrealEngine-Chinese/releases/tag/fab-source-v0.4.4) 发布里，只给 Fab 审核和愿意自行编译的开发者用，普通用户不需要。
 
 每个安装包是同一个插件，只有 `.uplugin` 里的 `EngineVersion` 和 `Binaries\Win64` 里的 DLL 不同，不能混用。安装包内含预编译模块和完整源码，不需要自己编译。
 
