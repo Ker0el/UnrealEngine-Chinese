@@ -5,7 +5,6 @@
 #include "StarryDictionary.h"
 #include "StarryEditorExtenders.h"
 #include "StarryHooks.h"
-#include "StarryLocale.h"
 #include "StarryPanel.h"
 #include "StarryToolbarButton.h"
 #include "StarryUEZh.h"
@@ -203,7 +202,6 @@ void FStarryUI::Unregister()
 void FStarryUI::SetEnabled(bool bEnabled)
 {
 	FStarryDictionary::Get().SetEnabled(bEnabled);
-	StarryLocale::Apply(bEnabled);
 	StarryHooks::RequestRefresh();
 
 	GConfig->SetBool(ConfigSection, ConfigKeyEnabled, bEnabled, GEditorPerProjectIni);

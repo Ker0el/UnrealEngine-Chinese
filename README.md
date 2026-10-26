@@ -125,11 +125,21 @@ UnrealBuildTool.exe StarryUEZhHostEditor Win64 Development ^
 - UE 5.3 到 5.7 使用 `Source\ThirdParty\Detours` 里的 Microsoft Detours v4.0.1。
 - 插件依赖 `AnimGraph`、`NiagaraEditor`、`MaterialEditor`、`BlueprintGraph` 等编辑器模块。
 
+## 游戏内文字与字体
+
+- 在编辑器里运行游戏（PIE）时，游戏界面中走 Slate 的文字（UMG、Slate 绘制的 3D 文字插件）也会被汉化。
+- 游戏字体没有中文字形时，插件会在内存里给它挂上 `DroidSansFallback` 回退字体，翻译后的中文不会再变成方块。只改内存，不会修改字体资产。
+- 世界里立着的 3D 文字（`TextRenderComponent`）使用预烤的字形贴图，运行时补不了中文字形。插件不会翻译这类文字，它们保持游戏原本的语言。
+- 打包后的游戏和「独立游戏」运行都不会加载本插件，完全不受影响。
+
 ## 已知限制
 
 1. 只覆盖 Slate 显示层的文字。Canvas 直绘文字和第三方插件自绘界面可能保持原样。
 2. 切换语言后，已经打开的材质 / 蓝图资产编辑器建议重新打开一次。
 3. 极少数和界面词条同名的用户变量名可能被显示层替换，只影响显示，不影响数据。
+4. 中文回退字体是黑体风格的 `DroidSansFallback`，被翻译的文字不会保留游戏原字体的艺术风格。
+5. 不翻译世界空间 3D 文字（`TextRenderComponent`），见上一节。
+6. 中英切换只控制插件自己的翻译；如果编辑器本身已设为中文（引擎语言），切到英文后引擎自带的界面文字仍会是中文。
 
 ## 许可证
 

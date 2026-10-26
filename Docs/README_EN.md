@@ -145,6 +145,21 @@ The first launch builds the dictionary index. Later launches load faster.
 **Where are logs?**
 Plugin log messages use the `LogStarryUEZh` category. They appear in the editor Output Log and in the project's `Saved/Logs` folder.
 
+## Game text and fonts
+
+- When you run the game inside the editor (PIE), Slate-rendered game text (UMG widgets, Slate-based 3D text plugins) is translated as well.
+- If a game font has no CJK glyphs, the plugin adds `DroidSansFallback` to that font's composite font in memory, so translated text no longer renders as tofu boxes. Font assets are not modified; the fallback exists only for the current editor session.
+- World-space `TextRenderComponent` text uses pre-baked glyph atlases and cannot gain new glyphs at runtime. The plugin does not translate it, so it stays in the game's original language.
+- Packaged games and Standalone runs do not load the plugin and are never affected.
+
+## Known limitations
+
+- Only Slate display text is covered. Canvas-drawn text and third-party custom-drawn UI may stay unchanged.
+- After switching language, reopen open Material and Blueprint asset editors.
+- Fallback Chinese glyphs come from DroidSansFallback, so translated text does not keep the game font's artistic style.
+- World-space `TextRenderComponent` text is not translated.
+- The language switch only controls the plugin's own translations. If the editor itself is running in Chinese (engine language), engine text stays Chinese after switching to English.
+
 ## Packaging and shipping
 
 - The plugin is an Editor module. Game targets do not compile or load it.

@@ -16,7 +16,10 @@
 #include "Fonts/FontMeasure.h"
 #include "Framework/Application/SlateApplication.h"
 #include "Framework/Text/PlainTextLayoutMarshaller.h"
+#include "Framework/Text/SlateTextLayout.h"
 #include "Framework/Text/TextLayout.h"
+#include "Fonts/FontCache.h"
+#include "Rendering/SlateRenderer.h"
 #include "HAL/FileManager.h"
 #include "Interfaces/IPluginManager.h"
 #include "HAL/PlatformProcess.h"
@@ -174,6 +177,134 @@ namespace
 			}
 		}
 		return bHasAlpha;
+	}
+
+	// ---------------------------------------------------------------------
+	// CJK font fallback
+	//
+	// Translated strings are drawn with the widget's own font. Game fonts and
+	// custom UMG fonts often have no CJK glyphs, so translated text turns into
+	// tofu boxes. Add DroidSansFallback as a CJK sub-font of the composite font
+	// (in memory only) so layout shaping and drawing both find glyphs.
+	// ---------------------------------------------------------------------
+
+	bool TextHasCjk(const FString& Text)
+	{
+		for (const TCHAR C : Text)
+		{
+			if ((C >= 0x2E80 && C <= 0x33FF)
+				|| (C >= 0x3400 && C <= 0x4DBF)
+				|| (C >= 0x4E00 && C <= 0x9FFF)
+				|| (C >= 0xF900 && C <= 0xFAFF)
+				|| (C >= 0xFE30 && C <= 0xFE4F)
+				|| (C >= 0xFF00 && C <= 0xFFEF))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	bool CompositeHasCjkRange(const FCompositeFont& Composite)
+	{
+		for (const FCompositeSubFont& SubFont : Composite.SubTypefaces)
+		{
+			for (const FInt32Range& Range : SubFont.CharacterRanges)
+			{
+				if (Range.Contains(0x4E00) || Range.Contains(0x4E2D) || Range.Contains(0x8BBE))
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	void InjectCjkFallback(FCompositeFont& Composite)
+	{
+		FCompositeSubFont& SubFont = Composite.SubTypefaces.AddDefaulted_GetRef();
+		SubFont.Typeface.AppendFont(
+			TEXT("Regular"),
+			FPaths::EngineContentDir() / TEXT("Slate/Fonts/DroidSansFallback.ttf"),
+			EFontHinting::Default,
+			EFontLoadingPolicy::LazyLoad);
+		SubFont.CharacterRanges.Add(FInt32Range(0x2E80, 0x33FF));
+		SubFont.CharacterRanges.Add(FInt32Range(0x3400, 0x4DBF));
+		SubFont.CharacterRanges.Add(FInt32Range(0x4E00, 0x9FFF));
+		SubFont.CharacterRanges.Add(FInt32Range(0xF900, 0xFAFF));
+		SubFont.CharacterRanges.Add(FInt32Range(0xFE30, 0xFE4F));
+		SubFont.CharacterRanges.Add(FInt32Range(0xFF00, 0xFFEF));
+#if WITH_EDITORONLY_DATA
+		Composite.MakeDirty();
+#endif
+		UE_LOG(LogStarryUEZh, Log, TEXT("字体缺少中文字形，已挂载回退字体 DroidSansFallback"));
+	}
+
+	/** Returns true when a fallback was added and widgets should relayout. */
+	bool EnsureCjkFallback(const FSlateFontInfo& FontInfo)
+	{
+		const FCompositeFont* Composite = FontInfo.GetCompositeFont();
+		if (!Composite || !FSlateApplicationBase::IsInitialized())
+		{
+			return false;
+		}
+
+		static TSet<const FCompositeFont*> Checked;
+		if (Checked.Contains(Composite))
+		{
+			return false;
+		}
+		Checked.Add(Composite);
+
+		if (CompositeHasCjkRange(*Composite))
+		{
+			return false;
+		}
+
+		FSlateRenderer* Renderer = FSlateApplicationBase::Get().GetRenderer();
+		if (!Renderer)
+		{
+			return false;
+		}
+
+		FCharacterList& Characters = Renderer->GetFontCache()->GetCharacterList(FontInfo, 1.0f);
+		static const TCHAR Probes[] = { 0x4E2D, 0x6587, 0x8BBE };
+		for (const TCHAR Probe : Probes)
+		{
+			const FCharacterEntry& Entry = Characters.GetCharacter(Probe, EFontFallback::FF_NoFallback);
+			// A missing glyph resolves to the invalid-substitute character, so the
+			// returned entry must be for the probed character itself.
+			if (Entry.Character == Probe && Entry.Valid && Entry.GlyphIndex != 0
+				&& Entry.FallbackLevel == EFontFallback::FF_NoFallback)
+			{
+				return false;
+			}
+		}
+
+		InjectCjkFallback(const_cast<FCompositeFont&>(*Composite));
+		Renderer->GetFontCache()->RequestFlushCache(TEXT("StarryUEZh CJK fallback"));
+		return true;
+	}
+
+	/**
+	 * The marshaller's SetText runs before the layout shapes the text, so
+	 * injecting here makes the cached layout use the fallback glyph metrics.
+	 */
+	void EnsureCjkFallbackForLayout(const FString& Text, const FTextLayout& Layout)
+	{
+		if (!TextHasCjk(Text))
+		{
+			return;
+		}
+
+		// Every Slate text block marshaller is paired with an FSlateTextLayout.
+		const FSlateTextLayout& SlateLayout = static_cast<const FSlateTextLayout&>(Layout);
+		if (EnsureCjkFallback(SlateLayout.GetDefaultTextStyle().Font))
+		{
+			// The layout was shaped with the old font; rebuild it once the
+			// font cache flush has been applied.
+			StarryHooks::RequestRefresh();
+		}
 	}
 
 	void AddGap(const FString& Text)
@@ -350,6 +481,7 @@ namespace
 
 			if (bHit)
 			{
+				EnsureCjkFallbackForLayout(Translated, TargetLayout);
 				Real_SetText(This, Translated, TargetLayout);
 				return;
 			}
@@ -397,7 +529,9 @@ namespace
 	{
 		if (Real_RichSetText)
 		{
-			Real_RichSetText(This, TranslateRichText(SourceString), TargetLayout);
+			const FString Translated = TranslateRichText(SourceString);
+			EnsureCjkFallbackForLayout(Translated, TargetLayout);
+			Real_RichSetText(This, Translated, TargetLayout);
 		}
 	}
 
@@ -447,6 +581,10 @@ namespace
 			FString Translated;
 			if (FStarryDictionary::Get().TranslateDisplay(Text.ToString(), Translated))
 			{
+				if (TextHasCjk(Translated) && EnsureCjkFallback(FontInfo))
+				{
+					StarryHooks::RequestRefresh();
+				}
 				const FText TranslatedText = FText::FromString(MoveTemp(Translated));
 				return Real_MeasureText(This, OutResult, TranslatedText, FontInfo, FontScale);
 			}
@@ -467,6 +605,10 @@ namespace
 			FString Translated;
 			if (FStarryDictionary::Get().TranslateMultilineDisplay(InText, Translated))
 			{
+				if (TextHasCjk(Translated) && EnsureCjkFallback(FontInfo))
+				{
+					StarryHooks::RequestRefresh();
+				}
 				Real_MakeText(ElementList, InLayer, PaintGeometry, Translated, FontInfo, DrawEffects, Tint);
 				return;
 			}

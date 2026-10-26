@@ -4,7 +4,6 @@
 
 #include "StarryDictionary.h"
 #include "StarryHooks.h"
-#include "StarryLocale.h"
 #include "StarryUI.h"
 
 #include "Containers/Ticker.h"
@@ -62,7 +61,6 @@ void FStarryUEZhModule::StartupModule()
 
 	if (bLoaded)
 	{
-		StarryLocale::Apply(bEnabled);
 		StarryHooks::Install();
 		FStarryUI::Register();
 
