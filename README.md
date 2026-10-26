@@ -34,21 +34,23 @@
 
 ## 下载
 
-**v0.4.3 安装包**（含预编译 DLL，开箱即用，支持 UE 5.0 – 5.8）：
+**v0.4.4 安装包**（含预编译 DLL，开箱即用，支持 UE 5.0 – 5.8）：
 
-到 [Releases v0.4.3](https://github.com/Ker0el/UnrealEngine-Chinese/releases/tag/v0.4.3) 按引擎版本下载：
+到 [Releases v0.4.4](https://github.com/Ker0el/UnrealEngine-Chinese/releases/tag/v0.4.4) 按引擎版本下载：
 
 | 引擎版本 | 安装包 |
 |---|---|
-| UE 5.0 | `StarryUEZh_v0.4.3_UE5.0.zip` |
-| UE 5.1 | `StarryUEZh_v0.4.3_UE5.1.zip` |
-| UE 5.2 | `StarryUEZh_v0.4.3_UE5.2.zip` |
-| UE 5.3 | `StarryUEZh_v0.4.3_UE5.3.zip` |
-| UE 5.4 | `StarryUEZh_v0.4.3_UE5.4.zip` |
-| UE 5.5 | `StarryUEZh_v0.4.3_UE5.5.zip` |
-| UE 5.6 | `StarryUEZh_v0.4.3_UE5.6.zip` |
-| UE 5.7 | `StarryUEZh_v0.4.3_UE5.7.zip` |
-| UE 5.8 | `StarryUEZh_v0.4.3_UE5.8.zip` |
+| UE 5.0 | `StarryUEZh_v0.4.4_UE5.0.zip` |
+| UE 5.1 | `StarryUEZh_v0.4.4_UE5.1.zip` |
+| UE 5.2 | `StarryUEZh_v0.4.4_UE5.2.zip` |
+| UE 5.3 | `StarryUEZh_v0.4.4_UE5.3.zip` |
+| UE 5.4 | `StarryUEZh_v0.4.4_UE5.4.zip` |
+| UE 5.5 | `StarryUEZh_v0.4.4_UE5.5.zip` |
+| UE 5.6 | `StarryUEZh_v0.4.4_UE5.6.zip` |
+| UE 5.7 | `StarryUEZh_v0.4.4_UE5.7.zip` |
+| UE 5.8 | `StarryUEZh_v0.4.4_UE5.8.zip` |
+
+同一个 Release 里还有 `StarryUEZh_v0.4.4_UE5.x_Source.zip`，那是不带 DLL 的纯源码包，供 Fab 审核和自行编译的开发者使用。
 
 每个安装包是同一个插件，只有 `.uplugin` 里的 `EngineVersion` 和 `Binaries\Win64` 里的 DLL 不同，不能混用。安装包内含预编译模块和完整源码，不需要自己编译。
 
@@ -69,7 +71,7 @@
 2. 打开项目，在「编辑 > 插件」里启用 **星空汉化**，重启编辑器。
 3. 插件依赖引擎自带的 **Niagara** 插件，确保它是启用状态。
 
-如果提示「模块缺失或引擎版本不同」，说明下载的包和引擎版本不一致，或者用的是不含 DLL 的 `v0.4.2` 源码包。请换成 `v0.4.3` 里与引擎大版本对应的安装包；源码包必须放到项目 `Plugins` 目录并用 Visual Studio 自行编译。
+如果提示「模块缺失或引擎版本不同」，说明下载的包和引擎版本不一致，或者用的是不含 DLL 的源码包。请换成 `v0.4.4` 里与引擎大版本对应的安装包；源码包必须放到项目 `Plugins` 目录并用 Visual Studio 自行编译。
 
 ## 使用
 
@@ -131,10 +133,12 @@ UnrealBuildTool.exe StarryUEZhHostEditor Win64 Development ^
 
 ## 许可证
 
-- 代码：MIT，见 `LICENSE`
-- 词库：CC BY-SA 4.0，见 `LICENSE-DICTIONARY`
+- 代码：MIT，完整文本见仓库 [LICENSE](https://github.com/Ker0el/UnrealEngine-Chinese/blob/main/LICENSE)
+- 词库：CC BY-SA 4.0，完整文本见仓库 [LICENSE-DICTIONARY](https://github.com/Ker0el/UnrealEngine-Chinese/blob/main/LICENSE-DICTIONARY)
 - `Source/ThirdParty/Detours`：Microsoft Detours v4.0.1，MIT，见 `Source/ThirdParty/Detours/LICENSE.md`
 - 部分词条来自 Unreal Engine 自带的 zh-Hans 本地化资源，版权归 Epic Games 所有，详见 `NOTICE.md`
+
+按 Fab 审核要求，分发给 Fab 的插件包里不带 `LICENSE` 和 `LICENSE-DICTIONARY`，许可证全文以上面的仓库链接为准。
 
 ## English
 

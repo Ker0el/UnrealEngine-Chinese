@@ -1,4 +1,4 @@
-// Copyright 星空汉化. All Rights Reserved.
+// Copyright 2026 StarGame. All Rights Reserved.
 
 using UnrealBuildTool;
 using System.IO;

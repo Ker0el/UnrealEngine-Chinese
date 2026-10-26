@@ -154,10 +154,12 @@ Plugin log messages use the `LogStarryUEZh` category. They appear in the editor 
 
 ## Licensing
 
-- Plugin source code and configuration: MIT License. See `LICENSE`.
-- Dictionary data: CC BY-SA 4.0. See `LICENSE-DICTIONARY`.
-- `ThirdParty/Detours`: Microsoft Detours v4.0.1, MIT License. See `ThirdParty/Detours/LICENSE.md`.
+- Plugin source code and configuration: MIT License. Full text: https://github.com/Ker0el/UnrealEngine-Chinese/blob/main/LICENSE
+- Dictionary data: CC BY-SA 4.0. Full text: https://github.com/Ker0el/UnrealEngine-Chinese/blob/main/LICENSE-DICTIONARY
+- `Source/ThirdParty/Detours`: Microsoft Detours v4.0.1, MIT License. See `Source/ThirdParty/Detours/LICENSE.md`.
 - Some dictionary entries are derived from the Simplified Chinese localization resources shipped with Unreal Engine. Unreal Engine and its bundled resources and trademarks are copyright Epic Games, Inc. This project is not affiliated with or endorsed by Epic Games. See `NOTICE.md`.
+
+Per Fab technical review requirements, the plugin package distributed through Fab does not contain the `LICENSE` and `LICENSE-DICTIONARY` files; the repository links above are the authoritative license texts.
 
 ## AI usage
 

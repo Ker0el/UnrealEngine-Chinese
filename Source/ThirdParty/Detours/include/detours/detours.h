@@ -1,5 +1,11 @@
 /////////////////////////////////////////////////////////////////////////////
 //
+//  Third-party component bundled with StarryUEZh.
+//  Microsoft Detours v4.0.1 - Copyright (c) Microsoft Corporation.
+//  Distributed by StarGame, 2026. MIT License, see LICENSE.md.
+//
+/////////////////////////////////////////////////////////////////////////////
+//
 //  Core Detours Functionality (detours.h of detours.lib)
 //
 //  Microsoft Research Detours Package, Version 4.0.1
