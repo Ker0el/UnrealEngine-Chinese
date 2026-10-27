@@ -29,10 +29,34 @@ copyright Epic Games, Inc. This project is not affiliated with or endorsed by Ep
 ## 第三方 / Third Party
 
 `Source/ThirdParty/Detours` 是 Microsoft Detours v4.0.1，版权归 Microsoft Corporation，
-使用 MIT 许可证，许可证文本见 `Source/ThirdParty/Detours/LICENSE.md`。
+使用 MIT 许可证。以下为完整的许可证文本：
 
 `Source/ThirdParty/Detours` is Microsoft Detours v4.0.1, Copyright (c) Microsoft
-Corporation, licensed under the MIT License; see `Source/ThirdParty/Detours/LICENSE.md`.
+Corporation, licensed under the MIT License. The full license text follows.
+
+```
+MIT License
+
+Copyright (c) Microsoft Corporation
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
 
 ## 不在授权范围内的内容 / Not Covered
 
@@ -42,8 +66,11 @@ Corporation, licensed under the MIT License; see `Source/ThirdParty/Detours/LICE
 
 ## 分发说明 / Distribution Note
 
-按 Fab 技术审核要求，插件包内不包含 `LICENSE` 和 `LICENSE-DICTIONARY` 文件，
-许可证全文以上面的公开仓库链接为准。
+按 Fab 技术审核要求，插件包内不包含任何独立的许可证文件
+（`LICENSE`、`LICENSE-DICTIONARY`、`Source/ThirdParty/Detours/LICENSE.md`），
+本文件即为包内的版权与许可证说明，第三方许可证全文已在上面给出。
 
-Per Fab technical review requirements, `LICENSE` and `LICENSE-DICTIONARY` are not
-included in the packaged plugin; the repository links above are authoritative.
+Per Fab technical review requirements, the packaged plugin contains no separate
+license files (`LICENSE`, `LICENSE-DICTIONARY`, `Source/ThirdParty/Detours/LICENSE.md`).
+This file is the copyright and licensing notice shipped with the plugin, and the
+third-party license text is reproduced above.

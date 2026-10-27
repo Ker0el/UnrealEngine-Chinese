@@ -1,8 +1,9 @@
+// Copyright 2026 StarGame. All Rights Reserved.
 /////////////////////////////////////////////////////////////////////////////
 //
 //  Third-party component bundled with StarryUEZh.
 //  Microsoft Detours v4.0.1 - Copyright (c) Microsoft Corporation.
-//  Distributed by StarGame, 2026. MIT License, see LICENSE.md.
+//  Distributed by StarGame, 2026. MIT License, see NOTICE.md.
 //
 /////////////////////////////////////////////////////////////////////////////
 //
