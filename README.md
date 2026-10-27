@@ -145,7 +145,7 @@ UnrealBuildTool.exe StarryUEZhHostEditor Win64 Development ^
 
 - 代码：MIT，完整文本见仓库 [LICENSE](https://github.com/Ker0el/UnrealEngine-Chinese/blob/main/LICENSE)
 - 词库：CC BY-SA 4.0，完整文本见仓库 [LICENSE-DICTIONARY](https://github.com/Ker0el/UnrealEngine-Chinese/blob/main/LICENSE-DICTIONARY)
-- `Source/ThirdParty/Detours`：Microsoft Detours v4.0.1，MIT，见 `Source/ThirdParty/Detours/LICENSE.md`
+- `Source/ThirdParty/Detours`：Microsoft Detours v4.0.1，MIT，完整许可证文本见 `NOTICE.md`
 - 部分词条来自 Unreal Engine 自带的 zh-Hans 本地化资源，版权归 Epic Games 所有，详见 `NOTICE.md`
 
 按 Fab 审核要求，分发给 Fab 的插件包里不带 `LICENSE` 和 `LICENSE-DICTIONARY`，许可证全文以上面的仓库链接为准。

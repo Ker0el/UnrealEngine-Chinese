@@ -18,7 +18,7 @@ The same source compiles for Unreal Engine 5.0, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.
 Engine differences handled by the source:
 
 - UE 5.8 and later link the Detours module bundled with the engine.
-- UE 5.0 through 5.7 link the Microsoft Detours v4.0.1 static library included in `ThirdParty/Detours`.
+- UE 5.0 through 5.7 link the Microsoft Detours v4.0.1 static library included in `Source/ThirdParty/Detours`.
 - API differences in Slate, Asset Registry, Tool Menus, Niagara, and Material Editor are handled with engine-version branches.
 
 ## Installation
@@ -171,7 +171,7 @@ Plugin log messages use the `LogStarryUEZh` category. They appear in the editor 
 
 - Plugin source code and configuration: MIT License. Full text: https://github.com/Ker0el/UnrealEngine-Chinese/blob/main/LICENSE
 - Dictionary data: CC BY-SA 4.0. Full text: https://github.com/Ker0el/UnrealEngine-Chinese/blob/main/LICENSE-DICTIONARY
-- `Source/ThirdParty/Detours`: Microsoft Detours v4.0.1, MIT License. See `Source/ThirdParty/Detours/LICENSE.md`.
+- `Source/ThirdParty/Detours`: Microsoft Detours v4.0.1, MIT License. The full license text is reproduced in `NOTICE.md`.
 - Some dictionary entries are derived from the Simplified Chinese localization resources shipped with Unreal Engine. Unreal Engine and its bundled resources and trademarks are copyright Epic Games, Inc. This project is not affiliated with or endorsed by Epic Games. See `NOTICE.md`.
 
 Per Fab technical review requirements, the plugin package distributed through Fab does not contain the `LICENSE` and `LICENSE-DICTIONARY` files; the repository links above are the authoritative license texts.
