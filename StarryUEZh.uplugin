@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
-	"Version": 12,
-	"VersionName": "0.4.5",
+	"Version": 13,
+	"VersionName": "0.4.6",
 	"EngineVersion": "5.8.0",
 	"FriendlyName": "星空汉化",
 	"Description": "蓝图、材质、Niagara 节点和编辑器界面的中文显示插件，支持 5.0 到 5.8，中英切换与中英文搜索，不修改源码、资产名和路径，不影响打包。",

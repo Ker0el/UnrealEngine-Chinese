@@ -8,7 +8,11 @@ public class StarryUEZh : ModuleRules
 	public StarryUEZh(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
-		CppStandard = CppStandardVersion.Cpp20;
+		// Stay on the engine's default C++ standard: C++17 in 5.0-5.2, C++20 in 5.3+.
+		// Forcing C++20 breaks UE 5.0 because NiagaraScript.h compares an
+		// FNiagaraVariable with an FNiagaraVariableBase, which is ambiguous once
+		// C++20 reversed comparison candidates are considered (C2666 in
+		// GetCompilerTag). Engine 5.1 fixed that header; the flag was never needed.
 		// ModuleRules.bWarningsAsErrors only exists from 5.3. The target rules
 		// already set bWarningsAsErrors = false in every build host.
 
