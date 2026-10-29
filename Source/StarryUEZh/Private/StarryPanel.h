@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "Types/SlateEnums.h"
 #include "Widgets/SCompoundWidget.h"
+#include "Widgets/Views/SListView.h"
+#include "Widgets/Input/SComboBox.h"
 
 class SDockTab;
 class FSpawnTabArgs;
@@ -65,7 +67,7 @@ private:
 
 	TArray<TSharedPtr<FStarryScanRow>> AllScanRows;
 	TArray<TSharedPtr<FStarryScanRow>> VisibleScanRows;
-	TSharedPtr<class SListView<TSharedPtr<FStarryScanRow>>> ScanListView;
+	TSharedPtr<SListView<TSharedPtr<FStarryScanRow>>> ScanListView;
 	TSharedPtr<class SEditableTextBox> ScanSourceBox;
 	TSharedPtr<class SEditableTextBox> ScanTranslationBox;
 	FString ScanSearchText;
@@ -76,7 +78,7 @@ private:
 	TSharedPtr<class SEditableTextBox> AIKeyBox;
 	int32 AIKeyFetchGeneration = 0;
 	TArray<TSharedPtr<FString>> AIModelOptions;
-	TSharedPtr<class SComboBox<TSharedPtr<FString>>> AIModelCombo;
+	TSharedPtr<SComboBox<TSharedPtr<FString>>> AIModelCombo;
 	FString SelectedModel;
 	TArray<FString> AIPendingSources;
 	TMap<FString, FString> AIResults;

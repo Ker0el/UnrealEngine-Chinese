@@ -4,6 +4,7 @@
 
 #include "StarryToolbarButton.h"
 #include "StarryUI.h"
+#include "Runtime/Launch/Resources/Version.h"
 
 #include "BlueprintEditorModule.h"
 #include "Editor.h"

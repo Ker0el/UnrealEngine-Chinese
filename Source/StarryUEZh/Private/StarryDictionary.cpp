@@ -3,6 +3,7 @@
 #include "StarryDictionary.h"
 
 #include "StarryUEZh.h"
+#include "AssetRegistry/AssetData.h"
 #include "AssetRegistry/AssetRegistryModule.h"
 #include "AssetRegistry/IAssetRegistry.h"
 #include "Dom/JsonObject.h"

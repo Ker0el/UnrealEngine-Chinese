@@ -9,6 +9,7 @@
 #include "StarryPanel.h"
 #include "StarryToolbarButton.h"
 #include "StarryUEZh.h"
+#include "Runtime/Launch/Resources/Version.h"
 
 #include "AssetToolsModule.h"
 #include "Editor.h"

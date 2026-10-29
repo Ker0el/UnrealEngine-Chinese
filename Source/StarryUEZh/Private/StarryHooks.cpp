@@ -4,6 +4,7 @@
 
 #include "StarryDictionary.h"
 #include "StarryUEZh.h"
+#include "Runtime/Launch/Resources/Version.h"
 
 #include "Containers/Ticker.h"
 #include "AnimStateNode.h"
